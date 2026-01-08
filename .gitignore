@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+
+# Data (Don't push huge raw files or the DB)
+data/raw/
+data/processed/
+qdrant_local_db/
+qdrant_storage/
+
+# OS
+.DS_Store
