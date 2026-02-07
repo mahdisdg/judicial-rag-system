@@ -2,12 +2,13 @@ from sentence_transformers import SentenceTransformer
 from typing import List
 import torch
 import numpy as np
+from .logger import logger
 
 class Embedder:
     def __init__(self, model_name: str, is_e5: bool = False):
-        print(f"🔄 Loading Model: {model_name}...")
+        logger.info(f"🔄 Loading Model: {model_name}...")
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        print(f"🚀 Using Device: {self.device}")
+        logger.info(f"🚀 Using Device: {self.device}")
         
         self.model = SentenceTransformer(model_name, trust_remote_code=True, device=self.device)
         self.is_e5 = is_e5

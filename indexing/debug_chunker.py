@@ -21,7 +21,7 @@ def debug_one_file(file_name: str):
         data = json.load(f)
 
     # Just take the first document for testing
-    doc = data[0]
+    doc = data[1]
     
     title = doc['clean_parts']['title']
     full_text = doc['text_full']

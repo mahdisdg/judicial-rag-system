@@ -4,11 +4,12 @@ __pycache__/
 venv/
 .env
 
-# Data (Don't push huge raw files or the DB)
+# Data
 data/raw/
 data/processed/
-qdrant_local_db/
-qdrant_storage/
+
+# DB
+qdrant_db_multilingual-e5-base/
 
 # OS
 .DS_Store
