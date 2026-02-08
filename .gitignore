@@ -13,3 +13,7 @@ qdrant_db_multilingual-e5-base/
 
 # OS
 .DS_Store
+
+# Logs
+logs/
+*.log
