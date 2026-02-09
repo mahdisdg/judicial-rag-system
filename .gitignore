@@ -15,7 +15,7 @@ data/processed/
 
 # --- Databases ---
 DBs/
-qdrant_storage/
+qdrant_db_multilingual-e5-base/
 *.db
 *.sqlite
 
