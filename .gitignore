@@ -1,19 +1,33 @@
-# Python
+# --- Python ---
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.Python
 venv/
+.venv/
+env/
 .env
 
-# Data
+# --- Project Specific Data ---
 data/raw/
 data/processed/
 
-# DB
-qdrant_db_multilingual-e5-base/
+# --- Databases ---
+DBs/
+qdrant_storage/
+*.db
+*.sqlite
 
-# OS
-.DS_Store
-
-# Logs
+# --- Logs ---
 logs/
 *.log
+
+# --- OS & IDE ---
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# --- Large Model Files ---
+models/

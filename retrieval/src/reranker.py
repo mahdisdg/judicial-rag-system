@@ -1,6 +1,6 @@
 from sentence_transformers import CrossEncoder
 from typing import List
-from indexing.src.logger import logger
+from .logger import logger
 
 
 def truncate(text: str, max_tokens: int = 512) -> str:

@@ -10,7 +10,7 @@ class Embedder:
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         logger.info(f"🚀 Using Device: {self.device}")
         
-        self.model = SentenceTransformer(model_name, trust_remote_code=True, device=self.device)
+        self.model = SentenceTransformer(model_name, trust_remote_code=True, device=self.device, local_files_only=True)
         self.is_e5 = is_e5
 
     @property
@@ -21,17 +21,12 @@ class Embedder:
         return self.model.get_sentence_embedding_dimension()
 
     def embed(self, texts: List[str], is_query: bool = False) -> np.ndarray:
-        """
-        Generates embeddings. 
-        Auto-adds 'passage:' or 'query:' prefix for E5 models.
-        """
         if not texts:
             return np.array([])
 
         if self.is_e5:
             prefix = "query: " if is_query else "passage: "
-            # Avoid double prefixing if it's already there
-            texts = [f"{prefix}{t}" if not t.startswith("passage:") and not t.startswith("query:") else t for t in texts]
+            texts = [f"{prefix}{t}" for t in texts]
             
         embeddings = self.model.encode(texts, convert_to_numpy=True, show_progress_bar=False, normalize_embeddings=True)
         return embeddings

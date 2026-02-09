@@ -2,20 +2,20 @@ import logging
 import os
 from datetime import datetime
 from pathlib import Path
-from .config import Config
+from indexing.src.config import Config
 
-def setup_logger(experiment_name: str):
+def setup_retrieval_logger(experiment_name: str):
     """
-    Sets up a logger that writes to both File and Console.
+    Sets up a logger for the retrieval pipeline that writes to the central logs directory.
     """
-    # Create logs directory
+    # Use the BASE_DIR from indexing config to find the logs folder
     log_dir = Config.BASE_DIR / "logs"
     log_dir.mkdir(parents=True, exist_ok=True)
 
-    # Create Unique Filename
+    # Create Unique Filename starting with 'retrieval_'
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     clean_exp_name = experiment_name.split("/")[-1]
-    log_file = log_dir / f"indexing_{clean_exp_name}_{timestamp}.log"
+    log_file = log_dir / f"retrieval_{clean_exp_name}_{timestamp}.log"
 
     logging.basicConfig(
         level=logging.INFO,
@@ -27,9 +27,9 @@ def setup_logger(experiment_name: str):
         ]
     )
     
-    logger = logging.getLogger("LegalRAG")
-    logger.info(f"📝 Log file created at: {log_file}")
+    logger = logging.getLogger("RetrievalLogger")
+    logger.info(f"🚀 Retrieval Log file created at: {log_file}")
     return logger
 
-# Generic logger instance
-logger = logging.getLogger("LegalRAG")
+# Generic logger instance for use inside classes
+logger = logging.getLogger("RetrievalLogger")
