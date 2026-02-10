@@ -1,69 +1,66 @@
-from typing import List, Dict, Any
+from typing import Dict, Any, List
+import logging
 
 from retrieval.src.pipeline import RetrievalPipeline
 from retrieval.src.context_builder import ContextBuilder
-from .prompt import PromptBuilder
 from .llm_client import LLMClient
+from .prompt import PromptBuilder
 
+logger = logging.getLogger("LegalRAG")
 
 class RAGPipeline:
-    """
-    End-to-end RAG pipeline:
-    Query → Retrieval → Context → Prompt → LLM → Answer
-    """
-
     def __init__(
         self,
         retrieval_pipeline: RetrievalPipeline,
         llm_client: LLMClient,
-        max_docs: int = 8,
+        max_docs_in_context: int = 8
     ):
         self.retrieval_pipeline = retrieval_pipeline
-        self.context_builder = ContextBuilder(max_docs=max_docs)
-        self.prompt_builder = PromptBuilder()
         self.llm_client = llm_client
+        
+        # Helper classes
+        self.context_builder = ContextBuilder(max_docs=max_docs_in_context)
+        self.prompt_builder = PromptBuilder()
 
     def run(self, query: str) -> Dict[str, Any]:
         """
-        Execute full RAG pipeline.
-
-        Returns:
-            {
-                "answer": str,
-                "documents": dict,
-                "used_docs": list[str]
-            }
+        Executes the full RAG flow: 
+        Retrieve -> Build Context -> Prompt -> Generate -> Parse
         """
+        logger.info(f"🚀 RAG Pipeline started for: {query}")
 
-        # 1️⃣ Retrieve + Re-rank
-        hits = self.retrieval_pipeline.run(
-            query=query,
-            retrieve_k=50
-        )
+        # Retrieval (Get Top-N relevant chunks)
+        # Note: We retrieve K candidates, re-rank them, and keep the best ones.
+        hits = self.retrieval_pipeline.run(query=query, retrieve_k=100)
 
-        # 2️⃣ Build context + document map
+        if not hits:
+            return {
+                "answer": "هیچ سند مرتبطی در پایگاه داده یافت نشد.",
+                "documents": {},
+                "used_docs": []
+            }
+
+        # Context Building (Format them into [DOC_1] strings)
         context_str, doc_map = self.context_builder.build(hits)
 
-        # 3️⃣ Build prompt
-        messages = self.prompt_builder.build(
-            query=query,
-            context=context_str
-        )
+        # Prompt Engineering
+        messages = self.prompt_builder.build(query, context_str)
 
-        # 4️⃣ Call LLM
+        # Generation
         answer = self.llm_client.generate(
             system_prompt=messages["system"],
             user_prompt=messages["user"]
         )
 
-        # 5️⃣ Extract used citations
-        used_docs = [
-            doc_id for doc_id in doc_map.keys()
-            if doc_id in answer
-        ]
+        # Citation Extraction (Simple heuristic)
+        # We check which [DOC_X] tags appear in the final answer
+        used_docs = []
+        for doc_label in doc_map.keys():
+            if doc_label in answer:
+                used_docs.append(doc_label)
 
         return {
             "answer": answer,
-            "documents": doc_map,
-            "used_docs": used_docs,
+            "documents": doc_map, # Map of DOC_1 -> Real Metadata
+            "used_docs": used_docs
         }
