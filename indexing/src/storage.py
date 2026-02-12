@@ -7,7 +7,7 @@ from .config import Config
 
 class VectorDB:
     def __init__(self, path: str, collection_name: str, vector_size: int):
-        logger.info(f"💾 Connecting to Qdrant Local at: {path}")
+        logger.info(f"Connecting to Qdrant Local at: {path}")
         
         self.client = QdrantClient(path=path)
         self.collection_name = collection_name
@@ -20,7 +20,7 @@ class VectorDB:
 
         if not exists:
             logger.info("="*40)
-            logger.info(f"🛠️  CREATING QDRANT INDEX: {self.collection_name}")
+            logger.info(f"   CREATING QDRANT INDEX: {self.collection_name}")
             logger.info(f"   - Vector Size: {self.vector_size}")
             logger.info(f"   - M (Edges): {Config.HNSW_M}")
             logger.info(f"   - ef_construct: {Config.HNSW_EF}")
@@ -39,7 +39,7 @@ class VectorDB:
                 )
             )
         else:
-            logger.info(f"✅ Collection {self.collection_name} already exists.")
+            logger.info(f"Collection {self.collection_name} already exists.")
 
     def upsert_batch(self, points_data: List[Dict[str, Any]]):
         points = [

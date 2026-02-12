@@ -26,7 +26,7 @@ class LLMClient:
         # Security check
         key = api_key or os.getenv("AVALAI_API_KEY")
         if not key:
-            logger.warning("⚠️ API Key not found! LLM calls will fail.")
+            logger.warning("API Key not found! LLM calls will fail.")
         
         self.client = OpenAI(
             api_key=key,

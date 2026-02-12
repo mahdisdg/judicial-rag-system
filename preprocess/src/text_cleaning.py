@@ -15,13 +15,13 @@ def normalize_text(text: Optional[str]) -> str:
     if not text:
         return ""
     
-    # 1. Basic whitespace cleanup before passing to shekar
+    # Basic whitespace cleanup before passing to shekar
     text = str(text).strip()
     
-    # 2. Use Shekar for standard normalization
+    # Use Shekar for standard normalization
     text = _NORMALIZER.normalize(text)
     
-    # 3. Custom cleanup: Ensure single newlines are preserved, but multiple are collapsed
+    # Ensure single newlines are preserved, but multiple are collapsed
     text = re.sub(r'\n{3,}', '\n\n', text)
     
     return text.strip()
@@ -29,7 +29,6 @@ def normalize_text(text: Optional[str]) -> str:
 def to_english_digits(text: str) -> str:
     """
     Converts Persian/Arabic digits to English digits.
-    This is CRITICAL for Regex matching of IDs, Dates, and Article numbers.
     """
     if not text:
         return ""

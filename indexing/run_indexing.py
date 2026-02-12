@@ -34,10 +34,10 @@ def main():
     files = glob.glob(file_pattern)
     
     if not files:
-        logger.error(f"❌ No files found in {Config.DATA_DIR}")
+        logger.error(f"No files found in {Config.DATA_DIR}")
         return
 
-    logger.info(f"📂 Found {len(files)} files to index.")
+    logger.info(f"Found {len(files)} files to index.")
 
     # Process Loop
     total_chunks = 0

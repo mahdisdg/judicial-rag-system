@@ -3,7 +3,6 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# --- SETUP PATHS ---
 # This ensures Python can find 'indexing' and 'retrieval' folders
 current_file = Path(__file__).resolve()
 project_root = current_file.parent.parent
@@ -25,7 +24,6 @@ def main():
     
     if not api_key:
         print("\n❌ ERROR: API Key missing!")
-        print("Please create a '.env' file in your project root with: AVALAI_API_KEY=sk-...\n")
         return
 
     print("⏳ Initializing System (Loading Models & Database)...")

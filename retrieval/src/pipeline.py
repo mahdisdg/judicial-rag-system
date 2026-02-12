@@ -28,12 +28,12 @@ class RetrievalPipeline:
             if current_tokens + count > max_tokens:
                 break
             
-            # Construct the rich object with metadata
+            # Construct the object with metadata
             result_obj = {
                 "text": text,
                 "metadata": hit.payload.get("metadata", {}),
                 "doc_id": hit.payload.get("doc_id", "unknown"),
-                "chunk_id": hit.id, # The unique Qdrant/Milvus ID
+                "chunk_id": hit.id, # The unique Qdrant ID
                 "score": score
             }
             
@@ -64,7 +64,7 @@ class RetrievalPipeline:
         if hasattr(valid_hits[0], 'vector') and valid_hits[0].vector is not None:
              doc_embeddings = np.array([h.vector for h in valid_hits])
         else:
-             # Fallback: re-embed if vectors are missing (Safety net)
+             # Fallback: re-embed if vectors are missing
              texts = [h.payload["text"] for h in valid_hits]
              doc_embeddings = self.embedder.embed(texts)
 

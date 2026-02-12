@@ -31,7 +31,8 @@ class Retriever:
                 with_vectors=True 
             )
             
-            hits = response.points # Extract the list instead of a QueryResponse object
+            # Extract the list
+            hits = response.points 
 
             logger.info(f"[RETRIEVER] retrieved {len(hits)} hits")
             return hits, query_vector

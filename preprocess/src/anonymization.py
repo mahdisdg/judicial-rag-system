@@ -8,12 +8,12 @@ class Anonymizer:
         self.secret = secret
         self.mapping: Dict[str, str] = {}
         
-        # --- 1. PATTERNS TO PRESERVE ---
+        # --- PATTERNS TO PRESERVE ---
         self.legal_refs_re = re.compile(r"(?:\bماده|\bاصل|\bبند|\bتبصره)\s*[0-9]+(?:\s*[ا-ی])?")
         self.date_re = re.compile(r"\b\d{4}[/-]\d{1,2}[/-]\d{1,2}\b")
         self.money_re = re.compile(r"(?:\d{1,3}(?:[,]\d{3})*|\d+)\s*(?:ریال|تومان|میلیون|میلیارد)")
 
-        # --- 2. PATTERNS TO REDACT ---
+        # --- PATTERNS TO REDACT ---
         self.name_context_re = re.compile(
             r"(?:آقای|خانم|وکیل|موکل|نامبرده|خواهان|خوانده|متهم)\s+" 
             r"([آ-ی\s\u200c]{3,30}?)"                                  
@@ -36,7 +36,7 @@ class Anonymizer:
         if not text:
             return ""
 
-        # STEP 1: PROTECTION
+        # PROTECTION
         protected_map = {}
         def protect(match):
             val = match.group(0)
@@ -48,7 +48,7 @@ class Anonymizer:
         text = self.legal_refs_re.sub(protect, text)
         text = self.money_re.sub(protect, text)
 
-        # STEP 2: REDACTION
+        # REDACTION
         def redact_name(match):
             full_match = match.group(0)
             name_part = match.group(1)
@@ -63,7 +63,7 @@ class Anonymizer:
             return match.group(0).replace(match.group(1), self._get_tag("CASE_ID", match.group(1)))
         text = self.case_id_context_re.sub(redact_case_id, text)
 
-        # STEP 3: RESTORATION
+        # RESTORATION
         for key, val in protected_map.items():
             text = text.replace(key, val)
 
@@ -86,7 +86,7 @@ def extract_related_laws(text: str) -> List[str]:
     
     matches = law_re.findall(text)
     
-    # Cleanup: Remove strict punctuation or extra spaces at the end
+    # Remove strict punctuation or extra spaces at the end
     cleaned_matches = []
     for m in matches:
         clean = m.strip()

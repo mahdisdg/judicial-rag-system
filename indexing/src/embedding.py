@@ -10,7 +10,7 @@ class Embedder:
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         logger.info(f"🚀 Using Device: {self.device}")
         
-        self.model = SentenceTransformer(model_name, trust_remote_code=True, device=self.device, local_files_only=True)
+        self.model = SentenceTransformer(model_name, trust_remote_code=True, device=self.device, local_files_only=False)
         self.is_e5 = is_e5
 
     @property
