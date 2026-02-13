@@ -1,0 +1,157 @@
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+/* --- GLOBAL RTL & FONT SETTINGS --- */
+.stApp {
+    background-color: #0F172A;
+    font-family: 'Vazirmatn', sans-serif !important;
+}
+
+p, div, h1, h2, h3, h4, h5, h6, input, textarea, button, .stMarkdown, .stText, .stHtml {
+    font-family: 'Vazirmatn', sans-serif !important;
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+
+/* Explicitly protect Icons */
+div[data-testid="stExpander"] summary span,
+div[data-testid="stChatMessageAvatar"] {
+    /* Use Material Icons font so 'keyboard_arrow_down' becomes an arrow */
+    font-family: 'Material Icons', sans-serif !important; 
+    direction: ltr !important;
+}
+
+/* Ensure the text inside the expander header (e.g. "Text") uses the Persian font */
+div[data-testid="stExpander"] summary p {
+    font-family: 'Vazirmatn', sans-serif !important;
+}
+/* --- HEADER --- */
+.main-header {
+    text-align: center !important;
+    padding: 2rem 0;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #334155;
+}
+
+.main-title {
+    color: #D4AF37 !important;
+    font-size: 2.5rem !important;
+    font-weight: 900 !important;
+    margin: 0 !important;
+    text-align: center !important;
+    text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+}
+
+.sub-title {
+    color: #94A3B8 !important;
+    font-size: 1.1rem !important;
+    margin-top: 0.5rem !important;
+    text-align: center !important;
+}
+
+/* --- CHAT BUBBLES --- */
+[data-testid="stChatMessage"] {
+    background-color: #1E293B;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+[data-testid="stChatMessageContent"] {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+/* --- FLASH CARDS --- */
+.flash-card-container {
+    background-color: #1E293B;
+    border: 1px solid #475569;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.flash-card-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+    border-color: #94A3B8;
+}
+
+.flash-card-container.cited {
+    border: 2px solid #D4AF37 !important;
+    background: linear-gradient(145deg, rgba(212, 175, 55, 0.05) 0%, rgba(30, 41, 59, 1) 100%);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+}
+
+.citation-badge {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background-color: #D4AF37;
+    color: #0F172A;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 3px 12px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    z-index: 10;
+}
+
+.card-title {
+    color: #F8FAFC;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #334155;
+    line-height: 1.6;
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #94A3B8;
+}
+
+.card-score {
+    font-family: monospace;
+    color: #10B981;
+    background: rgba(16, 185, 129, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* --- SIDEBAR & EXTRAS --- */
+[data-testid="stSidebar"] {
+    background-color: #0F172A;
+    border-left: 1px solid #334155;
+}
+
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+
+/* --- CLICKABLE CARDS --- */
+a.doc-link {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: block;
+}
+
+a.doc-link:hover {
+    text-decoration: none !important;
+}
+
+/* Ensure the hover effect still works on the inner container */
+a.doc-link:hover .flash-card-container {
+    transform: translateY(-3px);
+    border-color: #94A3B8;
+}

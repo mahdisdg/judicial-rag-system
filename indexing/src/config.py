@@ -12,12 +12,12 @@ class Config:
 
     # --- EXPERIMENT SETTINGS ---
     # Experiment 1: e5-base
-    # MODEL_NAME = "intfloat/multilingual-e5-base"
-    # IS_E5_MODEL = True
+    MODEL_NAME = "intfloat/multilingual-e5-base"
+    IS_E5_MODEL = True
     
     # Experiment 2: heydariAI
-    MODEL_NAME = "HooshvareLab/bert-base-parsbert-uncased"
-    IS_E5_MODEL = False
+    # MODEL_NAME = "HooshvareLab/bert-base-parsbert-uncased"
+    # IS_E5_MODEL = False
 
     # --- AUTOMATIC CONFIGURATION ---
     _clean_name = MODEL_NAME.split("/")[-1]
