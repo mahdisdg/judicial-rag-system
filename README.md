@@ -1,102 +1,45 @@
-# ⚖️ Judicial RAG System  
-### A Persian Legal Question-Answering Assistant Based on Retrieval-Augmented Generation (RAG)
+# ⚖️ Judicial RAG System
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue)
-![Status](https://img.shields.io/badge/Status-Academic%20Project-green)
-![Architecture](https://img.shields.io/badge/Architecture-RAG-orange)
+A Persian legal assistant based on Retrieval-Augmented Generation (RAG).
 
 ---
 
-## 📖 Project Overview
+## 📖 Overview
 
-This project implements an intelligent Persian legal assistant based on a **Retrieval-Augmented Generation (RAG)** architecture.
+Judicial RAG System is an intelligent question-answering system designed for Persian legal documents.
 
-The system retrieves relevant judicial decisions and generates grounded answers using Large Language Models (LLMs). The primary goal is to evaluate different RAG configurations in a legal domain setting and analyze their impact on retrieval quality, generation performance, and system latency.
+The system retrieves relevant judicial decisions using semantic vector search and generates grounded answers using Large Language Models (LLMs). It integrates document preprocessing, vector indexing, retrieval, reranking, and LLM-based generation into a unified pipeline.
 
----
-
-## 🎯 Objectives
-
-- Build a legal-domain question answering system in Persian
-- Compare different embedding models
-- Evaluate the impact of reranking
-- Compare different LLMs
-- Measure trade-offs between accuracy and latency
-- Analyze retrieval vs generation performance
+Its goal is to provide structured, context-aware, and legally grounded responses to user queries.
 
 ---
 
-## 🏗️ System Architecture
+## 🔎 What Happens When You Ask a Question?
 
-The system follows a standard RAG pipeline:
+When a user submits a legal question, the system performs the following steps:
 
-### 1️⃣ Data Processing
-- Crawling Persian judicial decisions
-- Cleaning and preprocessing legal texts
-- Extracting metadata (laws, legal articles, case numbers, references)
+1. **Query Processing**  
+   The user’s question is cleaned and prepared for embedding.
 
-### 2️⃣ Embedding & Indexing
-- Vector embedding models:
-  - E5-base
-  - ParsBERT
-- Vector database indexing
+2. **Query Embedding**  
+   The question is converted into a vector representation using the selected embedding model.
 
-### 3️⃣ Retrieval
-- Top-k semantic retrieval
-- Optional cross-encoder reranking
+3. **Semantic Retrieval**  
+   The system searches the vector database (Qdrant) to retrieve the most relevant legal documents based on similarity.
 
-### 4️⃣ Answer Generation
-- Prompt-based answer generation
-- Context grounding from retrieved documents
-- Citation-aware responses
+4. **Optional Reranking**  
+   If enabled, a reranker reorders the retrieved documents to improve relevance.
 
-### 5️⃣ Evaluation
-- Retrieval metrics
-- Generation metrics
-- Latency measurement
+5. **Context Construction**  
+   The top retrieved documents are combined into a structured context block.
 
----
+6. **LLM Generation**  
+   The context and the original question are sent to the language model, which generates a grounded legal answer.
 
-## 🧪 Experimental Setup
+7. **Response Delivery**  
+   The final answer is returned to the user through the interface.
 
-The system was evaluated across **8 experimental configurations**, varying:
-
-| Component | Variations |
-|-----------|------------|
-| Embedding Model | E5 / ParsBERT |
-| Reranker | Enabled / Disabled |
-| Language Model | GPT4oMini / qwen2.5-3b |
-
-Evaluation was conducted on **20 manually designed legal questions** with gold-standard answers.
-
----
-
-## 📊 Evaluation Metrics
-
-### 🔎 Retrieval Metrics
-- Recall@5
-- Recall@10
-- MRR (Mean Reciprocal Rank)
-- NDCG@10
-
-### ✍️ Generation Metrics
-- Exact Match (EM)
-- F1 Score
-- ROUGE-1
-- ROUGE-L
-
-### ⚡ Efficiency Metric
-- Average Latency
-
----
-
-## 📈 Key Findings
-
-- Reranking significantly improves retrieval metrics (Recall, MRR, NDCG).
-- Improved retrieval does not always guarantee better final answer quality.
-- GPT4oMini shows more stable generation performance than qwen2.5-3b.
-- There is a clear trade-off between retrieval accuracy and latency.
-- Exact Match remained zero due to paraphrased responses, highlighting the limitations of strict lexical matching.
+This pipeline ensures that responses are grounded in actual legal documents rather than being purely generative.
 
 ---
 
@@ -105,15 +48,21 @@ Evaluation was conducted on **20 manually designed legal questions** with gold-s
 ```
 judicial-rag-system/
 │
-├── data/                  # Processed judicial documents
-├── preprocessing/         # Text cleaning and metadata extraction
-├── embeddings/            # Embedding generation modules
-├── retrieval/             # Retrieval + reranker modules
-├── generation/            # Prompting & LLM interaction
-├── evaluation/            # Metrics and evaluation scripts
-├── experiments/           # Experimental configurations
-├── results/               # Evaluation outputs and logs
-└── main.py                # Entry point
+├── .streamlit/               # Streamlit configuration files
+├── config/                   # System configuration settings
+├── data/                     # Raw and processed legal documents
+├── DBs/                      # Database files and local storage
+├── experiments/              # Experimental configurations
+├── indexing/                 # Document indexing logic
+├── logs/                     # System logs and execution outputs
+├── preprocess/               # Text cleaning and preprocessing modules
+├── qdrant_db_multilingual/   # Qdrant vector database storage
+├── rag_llm/                  # RAG pipeline and LLM integration
+├── retrieval/                # Retrieval and reranking modules
+├── scraper/                  # Web scraping and data collection scripts
+├── ui/                       # User interface components
+├── .env                      # Environment variables
+└── .gitignore                # Git ignored files
 ```
 
 ---
@@ -133,23 +82,21 @@ cd judicial-rag-system
 pip install -r requirements.txt
 ```
 
-### 3️⃣ Run the pipeline
+### 3️⃣ Configure environment variables
+
+Create a `.env` file and add required API keys and configuration settings.
+
+### 4️⃣ Run the system
 
 ```bash
 python main.py
 ```
 
----
+If using the Streamlit interface:
 
-## 🔮 Future Improvements
-
-- Graph-RAG implementation
-- Domain-specific fine-tuned embeddings
-- Hybrid retrieval (Vector + BM25)
-- Legal knowledge graph construction
-- Human evaluation layer
-- Query rewriting fine-tuning
-- Citation verification module
+```bash
+streamlit run ui/app.py
+```
 
 ---
 
@@ -160,13 +107,4 @@ python main.py
 
 ---
 
-## 📌 Repository
-
-GitHub Repository:  
-https://github.com/mahdisdg/judicial-rag-system
-
----
-
-## 📜 License
-
-This project was developed for academic and research purposes.
+Academic Project – 2025
