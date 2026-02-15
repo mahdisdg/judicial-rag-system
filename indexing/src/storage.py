@@ -3,7 +3,7 @@ from qdrant_client.http import models
 from typing import List, Dict, Any
 import uuid
 from .logger import logger
-from .config import Config
+from config.config import Config
 
 class VectorDB:
     def __init__(self, path: str, collection_name: str, vector_size: int):

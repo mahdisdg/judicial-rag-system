@@ -2,7 +2,7 @@ import json
 import glob
 import time
 from tqdm import tqdm
-from src.config import Config
+from config.config import Config
 from src.embedding import Embedder
 from src.chunking import SemanticChunker
 from src.storage import VectorDB

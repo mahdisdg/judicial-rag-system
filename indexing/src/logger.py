@@ -2,7 +2,7 @@ import logging
 import os
 from datetime import datetime
 from pathlib import Path
-from .config import Config
+from config.config import Config
 
 def setup_logger(experiment_name: str):
     """

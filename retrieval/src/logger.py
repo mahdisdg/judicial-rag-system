@@ -1,6 +1,6 @@
 import logging
 from datetime import datetime
-from indexing.src.config import Config
+from config.config import Config
 
 def setup_retrieval_logger(experiment_name: str):
     """

@@ -36,3 +36,9 @@ class Retriever:
 
             logger.info(f"[RETRIEVER] retrieved {len(hits)} hits")
             return hits, query_vector
+    
+    def close(self):
+        """Explicitly closes the Qdrant connection to prevent shutdown errors."""
+        if self.client:
+            self.client.close()
+            logger.info("[RETRIEVER] Connection closed.")
