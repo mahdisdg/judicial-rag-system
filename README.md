@@ -67,44 +67,11 @@ judicial-rag-system/
 
 ---
 
-## 🚀 How to Run
-
-### 1️⃣ Clone the repository
-
-```bash
-git clone https://github.com/mahdisdg/judicial-rag-system.git
-cd judicial-rag-system
-```
-
-### 2️⃣ Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3️⃣ Configure environment variables
-
-Create a `.env` file and add required API keys and configuration settings.
-
-### 4️⃣ Run the system
-
-```bash
-python main.py
-```
-
-If using the Streamlit interface:
-
-```bash
-streamlit run ui/app.py
-```
-
----
-
 ## 👥 Authors
 
-- Mohammadmehdi Sadeghi  
+- MohammadMahdi Sadeghi  
 - Amirhossein KargarFard  
 
 ---
 
-Academic Project – 2025
+MCI Generative AI Bootcamp – 2026
