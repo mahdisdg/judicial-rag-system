@@ -1,0 +1,98 @@
+2026-02-13 19:36:53,835 - INFO - 📉 Status: 0 done. Generating 50 more...
+2026-02-13 19:37:14,508 - INFO - ✅ Generated in 2.06s | Est. Input Tokens: 124 | Est. Output: 5
+2026-02-13 19:37:18,283 - INFO - ✅ Generated in 1.76s | Est. Input Tokens: 123 | Est. Output: 5
+2026-02-13 19:38:37,481 - WARNING - ⚠️ Existing file is corrupted. Starting fresh.
+2026-02-13 19:38:37,482 - INFO - 📉 Status: 0 done. Generating 50 more...
+2026-02-13 19:38:48,740 - INFO - ✅ Generated in 6.89s | Est. Input Tokens: 55 | Est. Output: 19
+2026-02-13 19:38:51,998 - INFO - ✅ Generated in 1.24s | Est. Input Tokens: 83 | Est. Output: 19
+2026-02-13 19:38:55,060 - INFO - ✅ Generated in 1.06s | Est. Input Tokens: 73 | Est. Output: 23
+2026-02-13 19:38:58,920 - INFO - ✅ Generated in 1.84s | Est. Input Tokens: 70 | Est. Output: 5
+2026-02-13 19:39:02,653 - INFO - ✅ Generated in 1.73s | Est. Input Tokens: 37 | Est. Output: 5
+2026-02-13 19:39:06,533 - INFO - ✅ Generated in 1.88s | Est. Input Tokens: 80 | Est. Output: 5
+2026-02-13 19:39:10,385 - INFO - ✅ Generated in 1.84s | Est. Input Tokens: 53 | Est. Output: 5
+2026-02-13 19:52:43,277 - INFO - 📂 Loaded existing dataset with 3 items.
+2026-02-13 19:52:43,278 - INFO - 📉 Generating 47 more items...
+2026-02-13 19:52:49,313 - INFO - ✅ Generated in 1.74s
+2026-02-13 19:52:52,598 - INFO - ✅ Generated in 1.28s
+2026-02-13 19:52:55,879 - INFO - ✅ Generated in 1.27s
+2026-02-13 19:52:58,627 - INFO - ✅ Generated in 0.75s
+2026-02-13 19:53:02,470 - WARNING - ⚠️ Attempt 1/5 failed: API returned error message: خطای ارتباط با سرور.
+2026-02-13 19:53:02,471 - INFO - ⏳ Hit Rate Limit or Connection Error. Sleeping for 60 seconds...
+2026-02-13 19:54:03,899 - INFO - ✅ Generated in 1.41s
+2026-02-13 19:54:06,940 - INFO - ✅ Generated in 1.03s
+2026-02-13 19:54:10,216 - INFO - ✅ Generated in 1.27s
+2026-02-13 19:54:14,208 - WARNING - ⚠️ Attempt 1/5 failed: API returned error message: خطای ارتباط با سرور.
+2026-02-13 19:54:14,208 - INFO - ⏳ Hit Rate Limit or Connection Error. Sleeping for 60 seconds...
+2026-02-13 19:55:16,460 - WARNING - ⚠️ Attempt 2/5 failed: API returned error message: خطای ارتباط با سرور.
+2026-02-13 19:55:16,461 - INFO - ⏳ Hit Rate Limit or Connection Error. Sleeping for 60 seconds...
+2026-02-13 19:56:19,140 - INFO - ✅ Generated in 2.67s
+2026-02-13 19:56:22,003 - INFO - ✅ Generated in 0.86s
+2026-02-13 19:56:24,872 - INFO - ✅ Generated in 0.85s
+2026-02-13 19:56:28,567 - WARNING - ⚠️ Attempt 1/5 failed: API returned error message: خطای ارتباط با سرور.
+2026-02-13 19:56:28,568 - INFO - ⏳ Hit Rate Limit or Connection Error. Sleeping for 60 seconds...
+2026-02-13 19:57:29,870 - INFO - ✅ Generated in 1.29s
+2026-02-13 19:57:36,260 - INFO - ✅ Generated in 4.38s
+2026-02-13 19:57:40,137 - WARNING - ⚠️ Attempt 1/5 failed: API returned error message: خطای ارتباط با سرور.
+2026-02-13 19:57:40,138 - INFO - ⏳ Hit Rate Limit or Connection Error. Sleeping for 60 seconds...
+2026-02-13 19:58:41,370 - INFO - ✅ Generated in 1.23s
+2026-02-13 19:58:44,359 - INFO - ✅ Generated in 0.98s
+2026-02-13 19:58:48,336 - WARNING - ⚠️ Attempt 1/5 failed: API returned error message: خطای ارتباط با سرور.
+2026-02-13 19:58:48,336 - INFO - ⏳ Hit Rate Limit or Connection Error. Sleeping for 60 seconds...
+2026-02-13 19:59:49,560 - INFO - ✅ Generated in 1.21s
+2026-02-13 19:59:52,361 - INFO - ✅ Generated in 0.80s
+2026-02-13 19:59:55,452 - INFO - ✅ Generated in 1.09s
+2026-02-13 19:59:59,911 - WARNING - ⚠️ Attempt 1/5 failed: API returned error message: خطای ارتباط با سرور.
+2026-02-13 19:59:59,911 - INFO - ⏳ Hit Rate Limit or Connection Error. Sleeping for 60 seconds...
+2026-02-13 20:01:02,023 - INFO - ✅ Generated in 2.10s
+2026-02-13 20:01:05,025 - INFO - ✅ Generated in 0.99s
+2026-02-13 20:01:08,701 - INFO - ✅ Generated in 1.66s
+2026-02-13 20:01:12,208 - INFO - ✅ Generated in 1.50s
+2026-02-13 20:01:16,097 - WARNING - ⚠️ Attempt 1/5 failed: API returned error message: خطای ارتباط با سرور.
+2026-02-13 20:01:16,098 - INFO - ⏳ Hit Rate Limit or Connection Error. Sleeping for 60 seconds...
+2026-02-13 20:02:17,541 - INFO - ✅ Generated in 1.43s
+2026-02-13 20:02:20,380 - INFO - ✅ Generated in 0.82s
+2026-02-13 20:02:23,161 - INFO - ✅ Generated in 0.77s
+2026-02-13 20:02:26,983 - WARNING - ⚠️ Attempt 1/5 failed: API returned error message: خطای ارتباط با سرور.
+2026-02-13 20:02:26,984 - INFO - ⏳ Hit Rate Limit or Connection Error. Sleeping for 60 seconds...
+2026-02-13 20:03:29,183 - WARNING - ⚠️ Attempt 2/5 failed: API returned error message: خطای ارتباط با سرور.
+2026-02-13 20:03:29,184 - INFO - ⏳ Hit Rate Limit or Connection Error. Sleeping for 60 seconds...
+2026-02-13 20:04:31,596 - WARNING - ⚠️ Attempt 3/5 failed: API returned error message: خطای ارتباط با سرور.
+2026-02-13 20:04:31,597 - INFO - ⏳ Hit Rate Limit or Connection Error. Sleeping for 60 seconds...
+2026-02-13 20:05:32,983 - INFO - ✅ Generated in 1.37s
+2026-02-13 20:05:36,007 - INFO - ✅ Generated in 1.01s
+2026-02-13 20:05:39,988 - WARNING - ⚠️ Attempt 1/5 failed: API returned error message: خطای ارتباط با سرور.
+2026-02-13 20:05:39,989 - INFO - ⏳ Hit Rate Limit or Connection Error. Sleeping for 60 seconds...
+2026-02-13 20:06:41,421 - INFO - ✅ Generated in 1.42s
+2026-02-13 20:06:44,586 - INFO - ✅ Generated in 1.15s
+2026-02-13 20:06:47,326 - INFO - ✅ Generated in 0.71s
+2026-02-13 20:06:50,873 - INFO - ✅ Generated in 1.54s
+2026-02-13 20:06:54,740 - WARNING - ⚠️ Attempt 1/5 failed: API returned error message: خطای ارتباط با سرور.
+2026-02-13 20:06:54,741 - INFO - ⏳ Hit Rate Limit or Connection Error. Sleeping for 60 seconds...
+2026-02-13 20:07:55,981 - INFO - ✅ Generated in 1.23s
+2026-02-13 20:07:58,946 - INFO - ✅ Generated in 0.95s
+2026-02-13 20:08:01,914 - INFO - ✅ Generated in 0.96s
+2026-02-13 20:08:05,068 - INFO - ✅ Generated in 1.15s
+2026-02-13 20:08:07,938 - INFO - ✅ Generated in 0.86s
+2026-02-13 20:08:11,162 - INFO - ✅ Generated in 1.22s
+2026-02-13 20:08:14,575 - INFO - ✅ Generated in 1.41s
+2026-02-13 20:08:18,449 - WARNING - ⚠️ Attempt 1/5 failed: API returned error message: خطای ارتباط با سرور.
+2026-02-13 20:08:18,450 - INFO - ⏳ Hit Rate Limit or Connection Error. Sleeping for 60 seconds...
+2026-02-13 20:09:20,040 - INFO - ✅ Generated in 1.58s
+2026-02-13 20:09:23,835 - WARNING - ⚠️ Attempt 1/5 failed: API returned error message: خطای ارتباط با سرور.
+2026-02-13 20:09:23,836 - INFO - ⏳ Hit Rate Limit or Connection Error. Sleeping for 60 seconds...
+2026-02-13 20:10:25,175 - INFO - ✅ Generated in 1.33s
+2026-02-13 20:10:29,065 - WARNING - ⚠️ Attempt 1/5 failed: API returned error message: خطای ارتباط با سرور.
+2026-02-13 20:10:29,066 - INFO - ⏳ Hit Rate Limit or Connection Error. Sleeping for 60 seconds...
+2026-02-13 20:11:30,297 - INFO - ✅ Generated in 1.22s
+2026-02-13 20:11:33,574 - INFO - ✅ Generated in 1.27s
+2026-02-13 20:11:37,415 - INFO - ✅ Generated in 1.82s
+2026-02-13 20:11:41,366 - WARNING - ⚠️ Attempt 1/5 failed: API returned error message: خطای ارتباط با سرور.
+2026-02-13 20:11:41,366 - INFO - ⏳ Hit Rate Limit or Connection Error. Sleeping for 60 seconds...
+2026-02-13 20:12:43,188 - INFO - ✅ Generated in 1.82s
+2026-02-13 20:12:46,042 - INFO - ✅ Generated in 0.85s
+2026-02-13 20:12:50,030 - WARNING - ⚠️ Attempt 1/5 failed: API returned error message: خطای ارتباط با سرور.
+2026-02-13 20:12:50,031 - INFO - ⏳ Hit Rate Limit or Connection Error. Sleeping for 60 seconds...
+2026-02-13 20:13:56,144 - INFO - ✅ Generated in 6.10s
+2026-02-13 20:13:59,019 - INFO - ✅ Generated in 0.86s
+2026-02-13 20:14:02,497 - INFO - ✅ Generated in 1.47s
+2026-02-13 20:14:02,505 - INFO - 🏁 Finished. Dataset size: 50

@@ -20,8 +20,7 @@ qdrant_db_multilingual-e5-base/
 *.sqlite
 
 # --- Logs ---
-logs/
-*.log
+# logs/
 
 # --- OS & IDE ---
 .DS_Store

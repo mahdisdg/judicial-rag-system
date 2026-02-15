@@ -1,0 +1,28 @@
+2026-02-08 23:28:16 [INFO] 📝 Log file created at: E:\MCI\FINAL PROJECT\logs\indexing_multilingual-e5-base_2026-02-08_23-28-16.log
+2026-02-08 23:28:16 [INFO] ⏱️  Starting Indexing Pipeline
+2026-02-08 23:28:16 [INFO] ⚙️  Model: intfloat/multilingual-e5-base | Batch: 64
+2026-02-08 23:28:16 [INFO] 📂 Database Path: E:\MCI\FINAL PROJECT\DBs
+2026-02-08 23:28:16 [INFO] 🔄 Loading Model: intfloat/multilingual-e5-base...
+2026-02-08 23:28:17 [INFO] 🚀 Using Device: cuda
+2026-02-08 23:28:17 [INFO] Load pretrained SentenceTransformer: intfloat/multilingual-e5-base
+2026-02-08 23:28:34 [WARNING] '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 69f0beae-2f97-43b6-8e5b-194d7b47daf9)')' thrown while requesting HEAD https://huggingface.co/intfloat/multilingual-e5-base/resolve/main/./modules.json
+2026-02-08 23:28:34 [WARNING] Retrying in 1s [Retry 1/5].
+2026-02-08 23:28:45 [WARNING] '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: e6bd20af-cac6-409f-994c-48b89238b1cb)')' thrown while requesting HEAD https://huggingface.co/intfloat/multilingual-e5-base/resolve/main/./modules.json
+2026-02-08 23:28:45 [WARNING] Retrying in 2s [Retry 2/5].
+2026-02-08 23:29:05 [WARNING] '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 1df4e272-5388-448f-8583-47b79258541f)')' thrown while requesting HEAD https://huggingface.co/intfloat/multilingual-e5-base/resolve/main/./modules.json
+2026-02-08 23:29:05 [WARNING] Retrying in 4s [Retry 3/5].
+2026-02-08 23:29:24 [WARNING] '(ReadTimeoutError("HTTPSConnectionPool(host='huggingface.co', port=443): Read timed out. (read timeout=10)"), '(Request ID: 1d21d120-91e0-49bf-b28d-69b570009d4a)')' thrown while requesting HEAD https://huggingface.co/api/resolve-cache/models/intfloat/multilingual-e5-base/835193815a3936a24a0ee7dc9e3d48c1fbb19c55/config.json
+2026-02-08 23:29:24 [WARNING] Retrying in 1s [Retry 1/5].
+2026-02-08 23:29:40 [INFO] 💾 Connecting to Qdrant Local at: E:\MCI\FINAL PROJECT\DBs\qdrant_multilingual-e5-base
+2026-02-08 23:29:40 [INFO] ========================================
+2026-02-08 23:29:40 [INFO] 🛠️  CREATING QDRANT INDEX: legal_rag_multilingual-e5-base
+2026-02-08 23:29:40 [INFO]    - Vector Size: 768
+2026-02-08 23:29:40 [INFO]    - M (Edges): 16
+2026-02-08 23:29:40 [INFO]    - ef_construct: 100
+2026-02-08 23:29:40 [INFO] ========================================
+2026-02-08 23:29:40 [INFO] 📂 Found 1026 files to index.
+2026-02-09 03:51:49 [INFO] ========================================
+2026-02-09 03:51:49 [INFO] 🎉 Indexing Complete!
+2026-02-09 03:51:49 [INFO] 📊 Total Chunks: 75348
+2026-02-09 03:51:49 [INFO] ⏱️  Time: 15813.24s (263.6 min)
+2026-02-09 03:51:49 [INFO] ========================================

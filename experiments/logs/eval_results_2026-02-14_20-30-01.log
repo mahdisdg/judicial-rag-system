@@ -1,0 +1,37 @@
+🚀 Starting Evaluation on 10 questions
+
+🧪 STARTING: Exp1_Small_Strict | qwen2.5-vl-3b-instruct | T=0.0 | Top_p=0.4
+------------------------------
+📊 RESULTS: Exp1_Small_Strict
+   🔹 Faithfulness:       0.1000
+   🔹 Hallucination Rate: 90.0%
+   🔹 Citation Recall:    90.0%
+   🔹 Avg Latency:        12.02s
+------------------------------
+
+🧪 STARTING: Exp2_Medium_Strict | gpt-4o-mini | T=0.0 | Top_p=0.4
+------------------------------
+📊 RESULTS: Exp2_Medium_Strict
+   🔹 Faithfulness:       0.7000
+   🔹 Hallucination Rate: 30.0%
+   🔹 Citation Recall:    90.0%
+   🔹 Avg Latency:        6.42s
+------------------------------
+
+🧪 STARTING: Exp3_Small_Creative | qwen2.5-vl-3b-instruct | T=0.8 | Top_p=0.95
+------------------------------
+📊 RESULTS: Exp3_Small_Creative
+   🔹 Faithfulness:       0.1000
+   🔹 Hallucination Rate: 90.0%
+   🔹 Citation Recall:    90.0%
+   🔹 Avg Latency:        5.89s
+------------------------------
+
+🧪 STARTING: Exp4_Medium_Creative | gpt-4o-mini | T=0.8 | Top_p=0.95
+------------------------------
+📊 RESULTS: Exp4_Medium_Creative
+   🔹 Faithfulness:       0.4000
+   🔹 Hallucination Rate: 60.0%
+   🔹 Citation Recall:    90.0%
+   🔹 Avg Latency:        6.16s
+------------------------------
