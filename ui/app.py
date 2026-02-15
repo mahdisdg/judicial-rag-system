@@ -2,6 +2,7 @@ import streamlit as st
 import sys
 import os
 import time
+import gc
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -30,40 +31,125 @@ def local_css(file_name):
 css_path = Path(__file__).parent / "assets" / "style.css"
 local_css(css_path)
 
-# --- CACHED PIPELINE ---
-@st.cache_resource(show_spinner=False)
-def get_rag_pipeline():
-    load_dotenv()
-    api_key = os.getenv("AVALAI_API_KEY")
-    if not api_key: return None
+# ==============================================================================
+# SAFE CACHING STRATEGY
+# ==============================================================================
+
+# LOAD RERANKER
+@st.cache_resource(show_spinner="در حال بارگذاری Reranker...")
+def get_reranker():
+    return ReRanker("BAAI/bge-reranker-v2-m3")
+
+# LOAD SEARCH ENGINE (Embedder + Qdrant Connection)
+# We MUST cache the Retriever to prevent Qdrant from trying to open the DB twice.
+@st.cache_resource(show_spinner="در حال اتصال به پایگاه داده و مدل Embedding...")
+def get_search_engine(model_name):
+    # Explicit garbage collection to release old locks/memory if switching
+    gc.collect()
     
-    print("⏳ Loading Models...")
-    embedder = Embedder(Config.MODEL_NAME, is_e5=Config.IS_E5_MODEL)
-    retriever = Retriever(str(Config.QDRANT_PATH), Config.COLLECTION_NAME, embedder)
-    reranker = ReRanker("BAAI/bge-reranker-v2-m3")
-    pipe = RetrievalPipeline(retriever, reranker, embedder)
-    llm = LLMClient(model_name="gpt-4o-mini", api_key=api_key)
-    return RAGPipeline(pipe, llm)
+    print(f"🔄 INITIALIZING ENGINE FOR: {model_name}")
+    
+    # Determine Config
+    is_e5 = "e5" in model_name.lower()
+    clean_name = model_name.split("/")[-1]
+    collection_name = f"legal_rag_{clean_name}"
+    db_path = Config.DB_ROOT_DIR / f"qdrant_{clean_name}"
+
+    if not db_path.exists():
+        return None, None, f"پایگاه داده برای {clean_name} یافت نشد."
+
+    # Load Model
+    embedder = Embedder(model_name=model_name, is_e5=is_e5)
+    
+    # Connect to Qdrant
+    retriever = Retriever(
+        qdrant_path=str(db_path), 
+        collection_name=collection_name, 
+        embedder=embedder
+    )
+    
+    return embedder, retriever, None
+
+# LOAD LLM
+def get_llm_client(model_name, temp, top_p, api_key):
+    return LLMClient(
+        model_name=model_name, 
+        api_key=api_key,
+        temperature=temp,
+        top_p=top_p
+    )
+
+# ==============================================================================
+
+# --- SIDEBAR ---
+with st.sidebar:
+    st.header("⚙️ تنظیمات سیستم")
+    
+    selected_llm = st.selectbox(
+        "مدل زبانی (LLM)",
+        ["gpt-4o-mini", "qwen2.5-vl-3b-instruct"],
+        index=0
+    )
+
+    selected_embedding = st.selectbox(
+        "مدل امبدینگ (Embedding)",
+        [
+            "HooshvareLab/bert-base-parsbert-uncased",
+            "intfloat/multilingual-e5-base"
+        ],
+        index=0
+    )
+
+    st.markdown("---")
+    st.subheader("پارامترهای تولید")
+    temperature = st.slider("میزان خلاقیت (Temperature)", 0.0, 1.0, 0.0, 0.1)
+    top_p = st.slider("تنوع پاسخ (Top P)", 0.0, 1.0, 0.9, 0.05)
+
+    st.markdown("---")
+    if st.button("پاک‌سازی حافظه گفتگو"):
+        st.session_state.messages = []
+        st.rerun()
 
 # --- INIT ---
-if "rag" not in st.session_state:
-    with st.spinner("در حال راه‌اندازی مغز حقوقی سیستم..."):
-        st.session_state.rag = get_rag_pipeline()
-
-rag = st.session_state.rag
-
-if not rag:
+load_dotenv()
+api_key = os.getenv("AVALAI_API_KEY")
+if not api_key:
     st.error("❌ کلید API یافت نشد.")
     st.stop()
 
-# --- SESSION STATE ---
+# Get Cached Resources
+try:
+    reranker = get_reranker()
+    embedder, retriever, error_msg = get_search_engine(selected_embedding)
+    
+    if error_msg:
+        st.error(f"⛔ خطا: {error_msg}")
+        st.warning("لطفاً ابتدا اسکریپت indexing/run_indexing.py را برای این مدل اجرا کنید.")
+        st.stop()
+
+except Exception as e:
+    st.error(f"خطای سیستمی: {e}")
+    st.stop()
+
+# Build Pipeline
+retrieval_pipe = RetrievalPipeline(retriever, reranker, embedder)
+llm = get_llm_client(selected_llm, temperature, top_p, api_key)
+rag = RAGPipeline(retrieval_pipeline=retrieval_pipe, llm_client=llm)
+
+# --- UI LAYOUT ---
+st.markdown("""
+<div class="main-header">
+    <h1 class="main-title">⚖️ دستیار هوشمند قضایی</h1>
+    <div class="sub-title">گفتگوی حقوقی با هوش مصنوعی</div>
+</div>
+""", unsafe_allow_html=True)
+
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# --- RENDER FUNCTION ---
+# --- RENDER HELPER ---
 def render_citations(result_data):
-    if not result_data.get('documents'):
-        return
+    if not result_data.get('documents'): return
 
     st.markdown("---")
     st.markdown("##### 📚 مستندات و منابع")
@@ -80,48 +166,25 @@ def render_citations(result_data):
             
             title = data['metadata'].get('title', 'بدون عنوان')
             raw_id = data['real_doc_id']
-            doc_id = raw_id
             
-            # Source URL
             source_url = data['metadata'].get('source_url', '#')
-            
             score = f"{data['score']:.4f}"
 
             css_class = "flash-card-container cited" if is_cited else "flash-card-container"
             badge = f'<div class="citation-badge">استناد شده</div>' if is_cited else ""
             
-            html = f"""<a href="{source_url}" target="_blank" class="doc-link"><div class="{css_class}">{badge}<div class="card-title">{label} | {title}</div><div class="card-meta"><span>پرونده: {doc_id}</span><span class="card-score">{score}</span></div></div></a>"""
+            html = f"""<a href="{source_url}" target="_blank" class="doc-link"><div class="{css_class}">{badge}<div class="card-title">{label} | {title}</div><div class="card-meta"><span>پرونده: {raw_id}</span><span class="card-score">{score}</span></div></div></a>"""
 
-            
             with cols[i % 3]:
                 st.markdown(html, unsafe_allow_html=True)
 
-# --- SIDEBAR ---
-with st.sidebar:
-    st.header("⚙️ تنظیمات")
-    st.selectbox("مدل زبانی", ["GPT-4o-mini"], disabled=True)
-    st.selectbox("روش جستجو", ["Hybrid Search"], disabled=True)
-    st.divider()
-    if st.button("پاک‌سازی حافظه"):
-        st.session_state.messages = []
-        st.rerun()
-
-# --- UI LAYOUT ---
-st.markdown("""
-<div class="main-header">
-    <h1 class="main-title">⚖️ دستیار هوشمند قضایی</h1>
-    <div class="sub-title">گفتگوی حقوقی با هوش مصنوعی</div>
-</div>
-""", unsafe_allow_html=True)
-
-# Render Chat History
+# --- CHAT LOOP ---
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
         if message["role"] == "assistant" and "rag_result" in message:
             render_citations(message["rag_result"])
 
-# Chat Input
 query = st.chat_input("سوال خود را بپرسید...")
 
 if query:
@@ -136,13 +199,11 @@ if query:
         try:
             status.write("🧠 در حال درک منظور شما...")
             
-            # Prepare history (excluding current query)
             chat_history_for_llm = [
                 {"role": m["role"], "content": m["content"]} 
                 for m in st.session_state.messages[:-1]
             ]
             
-            # Run Pipeline
             start_time = time.time()
             result = rag.run(query, chat_history_for_llm)
             end_time = time.time()
@@ -151,13 +212,9 @@ if query:
             status.write("📚 در حال بازیابی اسناد مرتبط...")
             status.update(label="پاسخ آماده شد", state="complete", expanded=False)
             
-            # Show Answer
             placeholder.markdown(result['answer'])
-            
-            # Show Citations
             render_citations(result)
             
-            # Save to History
             st.session_state.messages.append({
                 "role": "assistant", 
                 "content": result['answer'],
